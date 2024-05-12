@@ -35,9 +35,6 @@ chown $THE_USER /home/$THE_USER/.config/autostart/audio.sh.desktop
 #This will be used to autostart scream and can be edited if different parameters are used
 cp audio.sh /usr/bin/scream_audio.sh
 
-#Installing required packages
-apt install libpulse-dev make cmake
-
 #Compiling scream receiver
 cd scream-master/Receivers/unix/
 
