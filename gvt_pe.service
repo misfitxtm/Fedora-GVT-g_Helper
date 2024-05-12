@@ -6,4 +6,4 @@
     ExecStart=/bin/bash /usr/bin/gvt_pe.sh
     
     [Install]
-WantedBy=graphical.target
+    WantedBy=graphical.target

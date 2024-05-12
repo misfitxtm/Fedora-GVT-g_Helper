@@ -20,9 +20,9 @@ if [ -a modules_backup.txt ]
 	mv modules_backup.txt /etc/modules
 fi
 
-update-grub
+grub2-mkconfig -o "$(readlink -e /etc/grub2.conf)"
 
-update-initramfs -u
+dracut --regenerate-all --force
 
 rm /etc/systemd/system/gvt_pe.service
 

@@ -33,18 +33,16 @@ read YN
 
 if [ $YN = y ]
 then
-nano /etc/default/grub
+nvim /etc/default/grub
 fi
 
 
 #Updating grub
-update-grub
 
-#Installing required packages for Looking Glass
-apt-get install binutils-dev cmake fonts-freefont-ttf libsdl2-dev libsdl2-ttf-dev libspice-protocol-dev libfontconfig1-dev libx11-dev nettle-dev -y
+grub2-mkconfig -o "$(readlink -e /etc/grub2.conf)"
 
 #Install required packages for virtualization
-apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager ovmf -y
+dnf install @virtualization -y
 
 #Backing up /etc/modules for future use by uninstall.sh
 cat /etc/modules > modules_backup.txt
@@ -54,7 +52,7 @@ echo "vfio_mdev" >> /etc/modules
 echo "kvmgt" >> /etc/modules
 
 #Updating initramfs
-update-initramfs -u
+dracut --regenerate-all --force
 
 #Allowing Looking Glass in app armor
 echo "/dev/shm/looking-glass rw," >> /etc/apparmor.d/abstractions/libvirt-qemu
